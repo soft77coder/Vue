@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - "node"
+install:
+  - npm ci
+branches:
+  except:
+    - gh-pages
+stages:
+  - lint
+  - test
+  - build
+jobs:
+  include:
+    - stage: lint
+      script:
+        # Run linter
+        - npm run lint
+    - stage: test
+      script:
+        # Run tests
+        - npm run test
+    - stage: build
+      script:
+        # Build all
+        - npm run build:docs
+        - npm run build:system
+        - npm run build:app
